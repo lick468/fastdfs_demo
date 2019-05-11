@@ -1,0 +1,18 @@
+fastdfs.base.url: http://192.168.227.129:8888/
+storage:
+  type: fastdfs
+  fastdfs:
+    tracker_server: 192.168.227.129:22122
+spring:
+  thymeleaf:
+    cache: false
+    encoding: UTF-8
+    mode: LEGACYHTML5
+    prefix: classpath:/templates/
+    servlet:
+      content-type: text/html
+  servlet:
+    multipart:
+      max-file-size: 1024MB
+      max-request-size: 1024MB
+      enabled: true # 开启多文件上传

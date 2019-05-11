@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>文件上传</title>
+
+    <script src="/js/jquery-3.4.1.js" type="text/javascript"></script>
+    <script src="/dropzone/dropzone.js" type="text/javascript"></script>
+
+    <link href="/dropzone/dropzone.css" rel="stylesheet">
+</head>
+<body>
+
+<div class="form-group">
+    <label class="col-sm-2 control-label">文件上传</label>
+    <input id="path"  class="form-control" placeholder="文件上传路径" />
+    <div class="col-sm-10">
+        <div id="dropz" class="dropzone"></div>
+    </div>
+</div>
+
+<script>
+    $("#dropz").dropzone({
+        url: "/upload",
+        paramName: "dropFile",
+        maxFiles: 1, // 一次性上传的文件数量上限
+        maxFilesize: 1024, // 文件大小，单位：MB
+        acceptedFiles: ".jpg,.gif,.png,.jpeg,.mp4", // 上传的类型
+        addRemoveLinks: true,
+        parallelUploads: 1, // 一次上传的文件数量
+        dictDefaultMessage: '拖动文件至此或者点击上传',
+        dictMaxFilesExceeded: "您最多只能上传 1 个文件！",
+        dictResponseError: '文件上传失败!',
+        dictInvalidFileType: "文件类型只能是*.jpg,*.gif,*.png,*.jpeg",
+        dictFallbackMessage: "浏览器不受支持",
+        dictFileTooBig: "文件过大上传文件最大支持",
+        dictRemoveLinks: "删除",
+        dictCancelUpload: "取消",
+        init: function() {
+            this.on("success", function(file,data) {
+                $("#path").val(data.fileName);
+                console.log("File " + file.name + "uploaded");
+            });
+            this.on("removedfile", function(file) {
+                console.log("File " + file.name + "removed");
+            });
+        }
+    });
+</script>
+
+
+</body>
+</html>
